@@ -1,8 +1,12 @@
 package com.example.griselda.claselistview;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -26,6 +30,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         listView = (ListView) findViewById(R.id.lista_contactos);
+        /*Action Bar */
+
+        getSupportActionBar().setTitle("Barra con tiulo e icono");
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setIcon(R.mipmap.ic_launcher);
+
         inicializarContactos();
         listView.setAdapter(new ContactoAdapter());
 
@@ -33,25 +43,45 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Contacto contacto = (Contacto) listView.getItemAtPosition(i);
-                Toast.makeText(MainActivity.this,"Nombre "+contacto.getNombre(),Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "Nombre " + contacto.getNombre(), Toast.LENGTH_SHORT).show();
             }
         });
 
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.mi_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.sub1:
+                Intent intent = new Intent(this, SiguienteActivity.class);
+                startActivity(intent);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
     private void inicializarContactos() {
         contactos = new ArrayList<>();
-        contactos.add(new Contacto(15324747,"Juan","Perez"));
-        contactos.add(new Contacto(15897854,"Maria","Garcia"));
-        contactos.add(new Contacto(15324747,"Mariano","Gonzales"));
-        contactos.add(new Contacto(15897854,"Jorge","Bustos"));
-        contactos.add(new Contacto(15324747,"Juan","Perez"));
-        contactos.add(new Contacto(15897854,"Maria","Garcia"));
-        contactos.add(new Contacto(15324747,"Juan","Perez"));
-        contactos.add(new Contacto(15897854,"Maria","Garcia"));
-        contactos.add(new Contacto(15324747,"Juan","Perez"));
-        contactos.add(new Contacto(15897854,"Maria","Garcia"));contactos.add(new Contacto(15324747,"Juan","Perez"));
-        contactos.add(new Contacto(15897854,"Maria","Garcia"));
+        contactos.add(new Contacto(15324747, "Juan", "Perez"));
+        contactos.add(new Contacto(15897854, "Maria", "Garcia"));
+        contactos.add(new Contacto(15324747, "Mariano", "Gonzales"));
+        contactos.add(new Contacto(15897854, "Jorge", "Bustos"));
+        contactos.add(new Contacto(15324747, "Juan", "Perez"));
+        contactos.add(new Contacto(15897854, "Maria", "Garcia"));
+        contactos.add(new Contacto(15324747, "Juan", "Perez"));
+        contactos.add(new Contacto(15897854, "Maria", "Garcia"));
+        contactos.add(new Contacto(15324747, "Juan", "Perez"));
+        contactos.add(new Contacto(15897854, "Maria", "Garcia"));
+        contactos.add(new Contacto(15324747, "Juan", "Perez"));
+        contactos.add(new Contacto(15897854, "Maria", "Garcia"));
 
     }
 
